@@ -3,13 +3,13 @@
 Arquivo de apresentação sobre a documentação para Django Rest Framework para a matéria de Projeto Integrador II - 2° TADS - Tecnólogo em Análise e Desenvolvimento de Sistemas | 2024.
 
 ## Índice
-- [Introdução](#introdução)
-- [Requisitos](#requisitos)
-- [Preparando](#preparando-projeto)
-- [Construindo](#construindo-projeto)
-- [Testando](#testar-a-api)
-- [Estrutura do Arquivo](#estrutura-do-arquivo)
-- [Referências](#referencias)
+- [Introdução](#1-introdução)
+- [Requisitos](#2-requisitos)
+- [Preparando](#3-preparando-projeto)
+- [Construindo](#4-construindo-o-projeto)
+- [Testando](#5-testar-a-api)
+- [Estrutura do Arquivo](#6-estrutura-do-arquivo)
+- [Referências](#referências)
 
 ## 1. Introdução
 
@@ -136,7 +136,7 @@ urlpatterns = [
 ]
 ```
 
-### 3. Testar a API
+### 5. Testar a API
 ```bash
 python manage.py runserver
 ```
@@ -158,7 +158,6 @@ curl -X POST http://127.0.0.1:8000/api/items/ -d '{"name": "Item 1", "descriptio
 ```
 
 #### 3.2 Endpoints da API
-## Propostas
 Cadastro de Items: 
 ```
 POST /api/items/
@@ -183,7 +182,7 @@ GET /api/items/{id}/
 }
 ```
 
-## 4. Estrutura do Arquivo
+## 6. Estrutura do Arquivo
 ```bash
 DjangoDocumentacao/
 │
