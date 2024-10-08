@@ -5,8 +5,10 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 ## Índice
 - [Introdução](#introdução)
 - [Requisitos](#requisitos)
-- [Instalação](#instalação)
-- [Exemplo de Uso](#exemplo-de-uso)
+- [Preparando](#preparando-projeto)
+- [Construindo](#construindo-projeto)
+- [Testando](#testar-a-api)
+- [Estrutura do Arquivo](#estrutura-do-arquivo)
 - [Referências](#referencias)
 
 ## 1. Introdução
@@ -206,11 +208,7 @@ DjangoDocumentacao/
 ├── manage.py
 ```
 
-# Autor
-
-João Vitor Campõe Galescky
-
-# Referência
+# Referências
 
 HASHTAG PROGRAMAÇÃO. Django framework: do zero até o deploy [YouTube]. 16 fev. 2021. Disponível em: https://www.youtube.com/watch?v=4u0aI-90KnU&ab_channel=HashtagPrograma%C3%A7%C3%A3o. Acesso em: 8 out. 2024.
 
