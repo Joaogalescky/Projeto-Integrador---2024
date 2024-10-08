@@ -13,7 +13,7 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 
 ## 1. Introdução
 
-O Selenium é um conjunto de ferramentas que ajuda a automatizar navegadores da web. Em essência, ele permite que você controle o navegador de forma remota, simulando como um usuário interage com ele. Isso significa que você pode fazer coisas como clicar em botões, preencher formulários e navegar em sites automaticamente, em vez de fazer isso manualmente.
+O Swagger
 
 ## 2. Requisitos
 - Python
@@ -41,10 +41,10 @@ cd DjangoDocumentacao
 ```
 
 ## 4. Construindo o projeto
-### 4.1  Django e Django Rest Framework
+### 4.1  Django, Django Rest Framework e Swagger
 #### 4.1.1 Instação do pacote
 ```bash
-pip install django djangorestframework
+pip install django djangorestframework drf-yasg
 ```
 
 #### 4.1.2 Criação do projeto Django
