@@ -227,7 +227,3 @@ DJANGO SOFTWARE FOUNDATION. Django: Tutorial – Parte 1. 2024. Disponível em: 
 DJANGO SOFTWARE FOUNDATION. Django: Conteúdos e Referências. 2024. Disponível em: https://docs.djangoproject.com/pt-br/5.1/contents/. Acesso em: 8 out. 2024.
 
 DJANGO REST SWAGGER. Django REST Swagger: Documentação. Disponível em: https://django-rest-swagger.readthedocs.io/en/latest/. Acesso em: 8 out. 2024.
-
-## IFPR
-
-[![IFPR Logo](https://user-images.githubusercontent.com/126702799/234438114-4db30796-20ad-4bec-b118-246ebbe9de63.png)](https://user-images.githubusercontent.com/126702799/234438114-4db30796-20ad-4bec-b118-246ebbe9de63.png)
