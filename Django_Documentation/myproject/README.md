@@ -1,6 +1,5 @@
 ﻿# Projeto: Djando - Documentação
-
-# Sobre o projeto
+ 
 Arquivo de apresentação sobre a documentação para Django Rest Framework para a matéria de Projeto Integrador II - 2° TADS - Tecnólogo em Análise e Desenvolvimento de Sistemas | 2024.
 
 ## Índice
@@ -10,16 +9,20 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 - [Exemplo de Uso](#exemplo-de-uso)
 - [Referências](#referencias)
 
-## Requisitos
+## 1. Introdução
+
+O Selenium é um conjunto de ferramentas que ajuda a automatizar navegadores da web. Em essência, ele permite que você controle o navegador de forma remota, simulando como um usuário interage com ele. Isso significa que você pode fazer coisas como clicar em botões, preencher formulários e navegar em sites automaticamente, em vez de fazer isso manualmente.
+
+## 2. Requisitos
 - Python
 - Pacato Django e Django Rest Framework
 - Pip (gerenciador de pacotes do Python)
 - IDE (Visual Studio Code)
 - Navegador (Chrome, Firefox, etc.)
 
-## 1. Preparando projeto
+## 3. Preparando projeto
 
-### 1.1 Selecionando local do projeto
+### 3.1 Selecionando local do projeto
 Abra um terminal bash em sua Área de Trabalho
 ```bash
 cd Desktop
@@ -27,7 +30,7 @@ ou
 cd Área\ de\ Trabalho/
 ```
 
-### 1.2 Criação e utilização da pasta do projeto
+### 3.2 Criação e utilização da pasta do projeto
 ```bash
 mkdir DjangoDocumentacao
 ```
@@ -35,19 +38,19 @@ mkdir DjangoDocumentacao
 cd DjangoDocumentacao
 ```
 
-## 2. Construindo o projeto
-### 2.1  Django e Django Rest Framework
-#### 2.1.1 Instação do pacote
+## 4. Construindo o projeto
+### 4.1  Django e Django Rest Framework
+#### 4.1.1 Instação do pacote
 ```bash
 pip install django djangorestframework
 ```
 
-#### 2.1.2 Criação do projeto Django
+#### 4.1.2 Criação do projeto Django
 ```bash
 django-admin startproject projeto
 cd projeto
 ```
-#### 2.1.3 Editando os settings.py
+#### 4.1.3 Editando os settings.py
 ```bash
 INSTALLED_APPS = [
     'api',
@@ -56,7 +59,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-#### 2.1.4 Incluindo as urls.py
+#### 4.1.4 Incluindo as urls.py
 ```bash
 from django.contrib import admin
 from django.urls import path, include
@@ -67,14 +70,14 @@ urlpatterns = [
 ]
 ```
 
-#### 2.1.5 Criação da API Django
+#### 4.1.5 Criação da API Django
 ```bash
 cd ..
 python manage.py startapp api
 cd api/
 ```
 
-#### 2.1.6 Definindo o models.py
+#### 4.1.6 Definindo o models.py
 ```bash
 from django.db import models
 
@@ -86,13 +89,13 @@ class Item(models.Model):
         return self.name
 ```
 
-#### 2.1.7 Executar as migrações
+#### 4.1.7 Executar as migrações
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-#### 2.1.8 Criar serializers
+#### 4.1.8 Criar serializers
 ```bash
 from rest_framework import serializers
 from .models import Item
@@ -103,7 +106,7 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description']
 ```
 
-#### 2.1.9 Criar Views
+#### 4.1.9 Criar Views
 ```bash
 # api/views.py
 from rest_framework import generics
@@ -119,7 +122,7 @@ class ItemDetail(generics.RetrieveAPIView):
     serializer_class = ItemSerializer
 ```
 
-#### 2.2.0 Configurar URLs
+#### 4.2.0 Configurar URLs
 ```bash
 # api/urls.py
 from django.urls import path
@@ -152,7 +155,7 @@ curl http://127.0.0.1:8000/api/items/
 curl -X POST http://127.0.0.1:8000/api/items/ -d '{"name": "Item 1", "description": "Descrição do item 1"}' -H "Content-Type: application/json"
 ```
 
-#### 4. Endpoints da API
+#### 3.2 Endpoints da API
 ## Propostas
 Cadastro de Items: 
 ```
@@ -178,7 +181,7 @@ GET /api/items/{id}/
 }
 ```
 
-## Estrutura do Arquivo
+## 4. Estrutura do Arquivo
 ```bash
 DjangoDocumentacao/
 │
@@ -209,9 +212,21 @@ João Vitor Campõe Galescky
 
 # Referência
 
-https://www.youtube.com/watch?v=4u0aI-90KnU&ab_channel=HashtagPrograma%C3%A7%C3%A3o
+HASHTAG PROGRAMAÇÃO. Django framework: do zero até o deploy [YouTube]. 16 fev. 2021. Disponível em: https://www.youtube.com/watch?v=4u0aI-90KnU&ab_channel=HashtagPrograma%C3%A7%C3%A3o. Acesso em: 8 out. 2024.
 
-https://www.youtube.com/watch?v=rwSHQqQWGnI&list=PLZ5WLsqE1WPGPA0Z0H1XB8P6UwgTHOSaf&ab_channel=TreinaWeb
+TREINA WEB. Desenvolvimento web com Django: fundamentos e boas práticas [YouTube]. 13 jun. 2020. Disponível em: https://www.youtube.com/watch?v=rwSHQqQWGnI&list=PLZ5WLsqE1WPGPA0Z0H1XB8P6UwgTHOSaf&ab_channel=TreinaWeb. Acesso em: 8 out. 2024.
+
+CÓDIGO FONTE TV. Como funciona o Django framework: explicação prática [YouTube]. 10 ago. 2021. Disponível em: https://www.youtube.com/watch?v=3nl9AzttzBQ&ab_channel=C%C3%B3digoFonteTV. Acesso em: 8 out. 2024.
+
+DJANGOROAD. Django para iniciantes: introdução e primeiros passos [YouTube]. 5 set. 2019. Disponível em: https://www.youtube.com/watch?v=JC6gHKeegk4&ab_channel=Djangoroad. Acesso em: 8 out. 2024.
+
+BRAINTEMPLE TUTORIAL TV. Aplicações web com Django: passo a passo completo [YouTube]. 22 nov. 2020. Disponível em: https://www.youtube.com/watch?v=7MS1Z_1c5CU&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&ab_channel=BraintempleTutorialTV. Acesso em: 8 out. 2024.
+
+DJANGO SOFTWARE FOUNDATION. Django: Tutorial – Parte 1. 2024. Disponível em: https://docs.djangoproject.com/pt-br/5.1/intro/tutorial01/. Acesso em: 8 out. 2024.
+
+DJANGO SOFTWARE FOUNDATION. Django: Conteúdos e Referências. 2024. Disponível em: https://docs.djangoproject.com/pt-br/5.1/contents/. Acesso em: 8 out. 2024.
+
+DJANGO REST SWAGGER. Django REST Swagger: Documentação. Disponível em: https://django-rest-swagger.readthedocs.io/en/latest/. Acesso em: 8 out. 2024.
 
 ## IFPR
 
