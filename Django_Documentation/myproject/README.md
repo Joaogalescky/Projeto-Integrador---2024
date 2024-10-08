@@ -44,7 +44,7 @@ cd DjangoDocumentacao
 ### 4.1  Django, Django Rest Framework e Swagger
 #### 4.1.1 Instação do pacote
 ```bash
-pip install django djangorestframework drf-yasg
+pip install django djangorestframework drf-yasg // pacote Swagger (drf-yasg):
 ```
 
 #### 4.1.2 Criação do projeto Django
