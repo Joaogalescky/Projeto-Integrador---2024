@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Item
+from .models import Aluno
 
-class ItemSerializer(serializers.ModelSerializer):
+class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
-        fields = ['id', 'nome', 'descricao']
+        model = Aluno
+        fields = ['id', 'nome', 'idade', 'email', 'curso']
