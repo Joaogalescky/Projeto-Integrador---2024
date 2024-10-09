@@ -44,7 +44,7 @@ cd DjangoDocumentacao
 ### 4.1  Django, Django Rest Framework e Swagger
 #### 4.1.1 Instação do pacote
 ```bash
-pip install django djangorestframework drf-yasg // pacote Swagger (drf-yasg):
+pip install django-rest-swagger
 ```
 
 #### 4.1.2 Criação do projeto Django
@@ -57,6 +57,7 @@ cd projeto
 INSTALLED_APPS = [
     'api',
     'rest_framework',
+    'rest_framework_swagger',
     ...
 ]
 ```
@@ -65,10 +66,18 @@ INSTALLED_APPS = [
 ```bash
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('api_schema', get_schema_view(title='Documentação API', description='Descrição para o guia de documentação Django REST API'), name='api_schema'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('docs/', TemplateView.as_view(
+            template_name='docs.html',
+            extra_context={'schema_url':'api_schema'}
+        ), 
+    name='swagger-ui'),
 ]
 ```
 
@@ -81,14 +90,17 @@ cd api/
 
 #### 4.1.6 Definindo o models.py
 ```bash
+#api/models.py
 from django.db import models
 
-class Item(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    email = models.EmailField(unique=True)
+    curso = models.CharField(max_length=100)
+    
     def __str__(self):
-        return self.name
+        return self.nome
 ```
 
 #### 4.1.7 Executar as migrações
@@ -99,41 +111,41 @@ python manage.py migrate
 
 #### 4.1.8 Criar serializers
 ```bash
+#api/serializers.py
 from rest_framework import serializers
-from .models import Item
+from .models import Aluno
 
-class ItemSerializer(serializers.ModelSerializer):
+class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
-        fields = ['id', 'name', 'description']
+        model = Aluno
+        fields = ['id', 'nome', 'idade', 'email', 'curso']
 ```
 
 #### 4.1.9 Criar Views
 ```bash
 # api/views.py
-from rest_framework import generics
-from .models import Item
-from .serializers import ItemSerializer
+from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Aluno
+from .serializers import AlunoSerializer
 
-class ItemListCreate(generics.ListCreateAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
-
-class ItemDetail(generics.RetrieveAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+# Create your views here.
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
 ```
 
 #### 4.2.0 Configurar URLs
 ```bash
 # api/urls.py
-from django.urls import path
-from .views import ItemListCreate, ItemDetail
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import AlunoViewSet
 
-urlpatterns = [
-    path('items/', ItemListCreate.as_view(), name='item-list-create'),
-    path('items/<int:pk>/', ItemDetail.as_view(), name='item-detail'),
-]
+router = DefaultRouter()
+router.register(r'alunos', AlunoViewSet, basename='aluno')
+
+urlpatterns = router.urls
 ```
 
 ### 5. Testar a API
@@ -141,44 +153,42 @@ urlpatterns = [
 python manage.py runserver
 ```
 ```bash
-GET /api/items/ – Lista todos os itens.
-POST /api/items/ – Cria um novo item.
-GET /api/items/<id>/ – Retorna detalhes de um item específico.
+http://127.0.0.1:8000/swagger/
 ```
 
-#### 3.1 Exemplos de requisições:
-* GET para listar todos os itens:
-```bash
-curl http://127.0.0.1:8000/api/items/
+#### 5.1 Endpoints da API
+Cadastro Alunos: 
+```
+POST /api/alunos/
+```
+Buscar Alunos: 
+```
+GET /api/alunos/{id}/
+```
+Listar Alunos: 
+```
+GET /api/alunos/{id}/
+```
+Atualizar Alunos: 
+```
+PUT /api/alunos/
+```
+Atualizar Alunos: 
+```
+PUT /api/alunos/
+```
+Deletar Alunos: 
+```
+DELETE /api/alunos/
 ```
 
-* POST para criar um novo item:
-```bash
-curl -X POST http://127.0.0.1:8000/api/items/ -d '{"name": "Item 1", "description": "Descrição do item 1"}' -H "Content-Type: application/json"
-```
-
-#### 3.2 Endpoints da API
-Cadastro de Items: 
-```
-POST /api/items/
-```
-Edição de Items: 
-```
-PUT /api/items/
-```
-Deletar Items: 
-```
-DELETE /api/items/
-```
-Buscar Items: 
-```
-GET /api/items/{id}/
-```
 - Corpo de requisição (JSON):
 ```bash
 {
-    "name": "Nome do Item",
-    "description": "Descrição do Item"
+  "nome": "string",
+  "idade": 0,
+  "email": "user@example.com",
+  "curso": "string"
 }
 ```
 
