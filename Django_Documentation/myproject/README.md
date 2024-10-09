@@ -13,11 +13,11 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 
 ## 1. Introdução
 
-O Swagger
+O Swagger uma aplicação open source que padronizar, simplificar e auxiliar desenvolvedores nos processos de definição, criação, documentação e consumo de APIs REST, como endpoints, dados recebidos, dados retornados, códigos HTTP e métodos de autenticação etc. Especificando os padrões e fornecendo as ferramentas necessárias para escrever APIs seguras, com alto desempenho e escaláveis.
 
 ## 2. Requisitos
 - Python
-- Pacato Django e Django Rest Framework
+- Pacato Django, Django Rest Framework, Swagger
 - Pip (gerenciador de pacotes do Python)
 - IDE (Visual Studio Code)
 - Navegador (Chrome, Firefox, etc.)
@@ -109,7 +109,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-#### 4.1.8 Criar serializers
+#### 4.1.8 Criar e definir serializers.py
+```bash
+touch serializers.py
+```
 ```bash
 #api/serializers.py
 from rest_framework import serializers
@@ -121,7 +124,7 @@ class AlunoSerializer(serializers.ModelSerializer):
         fields = ['id', 'nome', 'idade', 'email', 'curso']
 ```
 
-#### 4.1.9 Criar Views
+#### 4.1.9 Definindo views.py
 ```bash
 # api/views.py
 from django.shortcuts import render
@@ -135,7 +138,7 @@ class AlunoViewSet(viewsets.ModelViewSet):
     serializer_class = AlunoSerializer
 ```
 
-#### 4.2.0 Configurar URLs
+#### 4.2.0 Configurar urls.py
 ```bash
 # api/urls.py
 from django.urls import path, include
@@ -219,18 +222,20 @@ DjangoDocumentacao/
 
 # Referências
 
-HASHTAG PROGRAMAÇÃO. Django framework: do zero até o deploy [YouTube]. 16 fev. 2021. Disponível em: https://www.youtube.com/watch?v=4u0aI-90KnU&ab_channel=HashtagPrograma%C3%A7%C3%A3o. Acesso em: 8 out. 2024.
-
-TREINA WEB. Desenvolvimento web com Django: fundamentos e boas práticas [YouTube]. 13 jun. 2020. Disponível em: https://www.youtube.com/watch?v=rwSHQqQWGnI&list=PLZ5WLsqE1WPGPA0Z0H1XB8P6UwgTHOSaf&ab_channel=TreinaWeb. Acesso em: 8 out. 2024.
+BRAINTEMPLE TUTORIAL TV. Aplicações web com Django: passo a passo completo [YouTube]. 22 nov. 2020. Disponível em: https://www.youtube.com/watch?v=7MS1Z_1c5CU&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&ab_channel=BraintempleTutorialTV. Acesso em: 8 out. 2024.
 
 CÓDIGO FONTE TV. Como funciona o Django framework: explicação prática [YouTube]. 10 ago. 2021. Disponível em: https://www.youtube.com/watch?v=3nl9AzttzBQ&ab_channel=C%C3%B3digoFonteTV. Acesso em: 8 out. 2024.
-
-DJANGOROAD. Django para iniciantes: introdução e primeiros passos [YouTube]. 5 set. 2019. Disponível em: https://www.youtube.com/watch?v=JC6gHKeegk4&ab_channel=Djangoroad. Acesso em: 8 out. 2024.
-
-BRAINTEMPLE TUTORIAL TV. Aplicações web com Django: passo a passo completo [YouTube]. 22 nov. 2020. Disponível em: https://www.youtube.com/watch?v=7MS1Z_1c5CU&list=PLnBvgoOXZNCOiV54qjDOPA9R7DIDazxBA&ab_channel=BraintempleTutorialTV. Acesso em: 8 out. 2024.
 
 DJANGO SOFTWARE FOUNDATION. Django: Tutorial – Parte 1. 2024. Disponível em: https://docs.djangoproject.com/pt-br/5.1/intro/tutorial01/. Acesso em: 8 out. 2024.
 
 DJANGO SOFTWARE FOUNDATION. Django: Conteúdos e Referências. 2024. Disponível em: https://docs.djangoproject.com/pt-br/5.1/contents/. Acesso em: 8 out. 2024.
 
 DJANGO REST SWAGGER. Django REST Swagger: Documentação. Disponível em: https://django-rest-swagger.readthedocs.io/en/latest/. Acesso em: 8 out. 2024.
+
+DJANGOROAD. Django para iniciantes: introdução e primeiros passos [YouTube]. 5 set. 2019. Disponível em: https://www.youtube.com/watch?v=JC6gHKeegk4&ab_channel=Djangoroad. Acesso em: 8 out. 2024.
+
+GR1D. Swagger: entenda o que é e como usar. Disponível em: https://gr1d.io/2022/04/15/swagger/. Acesso em: 9. out. 2024.
+
+HASHTAG PROGRAMAÇÃO. Django framework: do zero até o deploy [YouTube]. 16 fev. 2021. Disponível em: https://www.youtube.com/watch?v=4u0aI-90KnU&ab_channel=HashtagPrograma%C3%A7%C3%A3o. Acesso em: 8 out. 2024.
+
+TREINA WEB. Desenvolvimento web com Django: fundamentos e boas práticas [YouTube]. 13 jun. 2020. Disponível em: https://www.youtube.com/watch?v=rwSHQqQWGnI&list=PLZ5WLsqE1WPGPA0Z0H1XB8P6UwgTHOSaf&ab_channel=TreinaWeb. Acesso em: 8 out. 2024.
