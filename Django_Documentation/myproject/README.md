@@ -13,7 +13,17 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 
 ## 1. Introdução
 
-O Swagger uma aplicação open source que padronizar, simplificar e auxiliar desenvolvedores nos processos de definição, criação, documentação e consumo de APIs REST, como endpoints, dados recebidos, dados retornados, códigos HTTP e métodos de autenticação etc. Especificando os padrões e fornecendo as ferramentas necessárias para escrever APIs seguras, com alto desempenho e escaláveis.
+O Swagger é um conjunto de ferramentas open source que visa facilitar para os  desenvolvedores na modelagem, documentação e teste de API's em seus processos: definição, criação, documentação e consumo de APIs REST (como endpoints, dados recebidos, dados retornados, códigos HTTP, métodos de autenticação etc). Permitindo que tanto humanos quanto máquinas compreendam suas funcionalidades sem acesso direto ao código-fonte.
+
+Se destaca por:
+* Padronização: Swagger permite a descrição dos recursos de uma API, como endpoints, parâmetros, tipos de dados e códigos HTTP;
+* Documentação Automática: Gera documentação legível e interativa, facilitando o entendimento e a integração com outras aplicações;
+* Testes: Possui uma interface que permite testar endpoints diretamente na documentação, melhorando a usabilidade.
+
+Inclui várias ferramentas:
+* Swagger UI: Interface gráfica que exibe a documentação da API e permite interagir com seus endpoints;
+* Swagger Editor: Um editor online que permite criar definições de API usando formatos como YAML ou JSON;
+* Swagger Codegen: Gera código cliente e servidor em várias linguagens, facilitando a implementação.
 
 ## 2. Requisitos
 - Python
@@ -44,6 +54,7 @@ cd DjangoDocumentacao
 ### 4.1  Django, Django Rest Framework e Swagger
 #### 4.1.1 Instação do pacote
 ```bash
+pip install django djangorestframework
 pip install django-rest-swagger
 ```
 
