@@ -23,8 +23,8 @@ urlpatterns = [
     path('api_schema', get_schema_view(title='Documentação API', description='Descrição para o guia de documentação Django REST API'), name='api_schema'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('docs/', TemplateView.as_view(
-            template_name='docs.html',
+    path('swagger/', TemplateView.as_view(
+            template_name='swagger.html',
             extra_context={'schema_url':'api_schema'}
         ), 
     name='swagger-ui'),
