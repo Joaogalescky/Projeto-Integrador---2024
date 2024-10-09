@@ -75,6 +75,7 @@ INSTALLED_APPS = [
 
 #### 4.1.4 Incluindo as urls.py
 ```bash
+#projeto/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.schemas import get_schema_view
