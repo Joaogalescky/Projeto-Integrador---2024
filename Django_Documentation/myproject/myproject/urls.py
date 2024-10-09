@@ -16,16 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.schemas import get_schema_view
-from django.views.generic import TemplateView
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+# Configuração do esquema da API
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Minha API",
+        default_version='v1',
+        description="Descrição do projeto de exemplo",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contato@minhaapi.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
-    path('api_schema', get_schema_view(title='Documentação API', description='Descrição para o guia de documentação Django REST API'), name='api_schema'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('swagger/', TemplateView.as_view(
-            template_name='swagger.html',
-            extra_context={'schema_url':'api_schema'}
-        ), 
-    name='swagger-ui'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Interface do Swagger
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Interface do ReDoc
 ]
