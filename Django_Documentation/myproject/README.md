@@ -13,11 +13,37 @@ Arquivo de apresentação sobre a documentação para Django Rest Framework para
 
 ## 1. Introdução
 
-O Swagger
+O Swagger é um conjunto de ferramentas open source que visa facilitar para os desenvolvedores na modelagem, documentação e teste de API's em seus processos: definição, criação, documentação e consumo de APIs REST (como endpoints, dados recebidos, dados retornados, códigos HTTP, métodos de autenticação etc). Permitindo que tanto humanos quanto máquinas compreendam suas funcionalidades sem acesso direto ao código-fonte.
+
+Se destaca por:
+* Padronização: Swagger permite a descrição dos recursos de uma API, como endpoints, parâmetros, tipos de dados e códigos HTTP;
+* Documentação Automática: Gera documentação legível e interativa, facilitando o entendimento e a integração com outras aplicações;
+* Testes: Possui uma interface que permite testar endpoints diretamente na documentação, melhorando a usabilidade.
+
+Inclui várias ferramentas:
+* Swagger UI: Interface gráfica que exibe a documentação da API e permite interagir com seus endpoints;
+* Swagger Editor: Um editor online que permite criar definições de API usando formatos como YAML ou JSON;
+* Swagger Codegen: Gera código cliente e servidor em várias linguagens, facilitando a implementação.
+
+O drf-yasg (Django Rest Framework - Yet Another Swagger Generator) é uma biblioteca para o Django Rest Framework que gera automaticamente a documentação Swagger/OpenAPI da sua API. Essa documentação descreve os endpoints, os métodos HTTP suportados (GET, POST, PUT, DELETE, etc.), e como interagir com eles, fornecendo uma interface visual interativa (via Swagger UI), onde você pode testar os endpoints diretamente no navegador.
+
+Características:
+* Geração Automática de Documentação: inspeciona os serializers, viewsets e rotas definidos na sua API para gerar a documentação automaticamente;
+* Suporte ao OpenAPI/Swagger;
+* Interface Interativa via Swagger;
+* Personalização: oferece uma série de opções para personalizar a aparência e a forma como a documentação é gerada, como customizar títulos, descrições e campos adicionais.
+
+O ReDoc é uma outra interface gráfica de documentação de APIs OpenAPI, assim como o Swagger UI, mas com algumas diferenças em estilo e funcionalidade. É conhecido por ser muito mais moderno, minimalista e otimizado para uma melhor usabilidade em comparação com o Swagger UI, estando focado em uma melhor legibilidade e na organização da documentação, especialmente para APIs maiores e mais complexas.
+
+Características principais do ReDoc:
+* Design limpo e organizado: oferece uma interface mais elegante e moderna, com foco na apresentação organizada de informações, especialmente em APIs grandes;
+* Divisão de Seções: agrupa automaticamente a documentação em seções, facilitando a navegação;
+* Melhor legibilidade: focado na leitura e na compreensão de como os endpoints funcionam;
+* Suporte total ao OpenAPI.
 
 ## 2. Requisitos
 - Python
-- Pacato Django e Django Rest Framework
+- Pacote Django, Django Rest Framework, D
 - Pip (gerenciador de pacotes do Python)
 - IDE (Visual Studio Code)
 - Navegador (Chrome, Firefox, etc.)
@@ -41,10 +67,11 @@ cd DjangoDocumentacao
 ```
 
 ## 4. Construindo o projeto
-### 4.1  Django, Django Rest Framework e Swagger
+### 4.1  Django, Django Rest Framework e drf-yasg
 #### 4.1.1 Instação do pacote
 ```bash
-pip install django-rest-swagger
+pip install django djangorestframework
+pip install drf-yasg
 ```
 
 #### 4.1.2 Criação do projeto Django
@@ -56,28 +83,40 @@ cd projeto
 ```bash
 INSTALLED_APPS = [
     'api',
+    'drf-yasg'
     'rest_framework',
-    'rest_framework_swagger',
     ...
 ]
 ```
 
 #### 4.1.4 Incluindo as urls.py
 ```bash
+#projeto/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.schemas import get_schema_view
-from django.views.generic import TemplateView
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+# Configuração do esquema da API
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Minha API",
+        default_version='v1',
+        description="Descrição do projeto de exemplo",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contato@minhaapi.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
-    path('api_schema', get_schema_view(title='Documentação API', description='Descrição para o guia de documentação Django REST API'), name='api_schema'),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('docs/', TemplateView.as_view(
-            template_name='docs.html',
-            extra_context={'schema_url':'api_schema'}
-        ), 
-    name='swagger-ui'),
+    path('api/', include('api.urls')),  # Inclua suas URLs da API
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Interface do Swagger
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Interface do ReDoc
 ]
 ```
 
@@ -153,7 +192,10 @@ urlpatterns = router.urls
 python manage.py runserver
 ```
 ```bash
+#Swagger UI
 http://127.0.0.1:8000/swagger/
+#ReDoc 
+http://127.0.0.1:8000/redoc/
 ```
 
 #### 5.1 Endpoints da API
