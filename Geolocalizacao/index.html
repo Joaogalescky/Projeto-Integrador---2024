@@ -38,8 +38,10 @@
         const lon = position.coords.longitude;
         const accuracy = position.coords.accuracy;
 
-        L.marker([lat, lon]).addTo(mapa);
-        L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
+        let marker = L.marker([lat, lon]).addTo(mapa);
+        let circle = L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
+
+        mapa.fitBounds(circle.getBounds());
     }
 
     function error() {
