@@ -38,7 +38,8 @@
         const lon = position.coords.longitude;
         const accuracy = position.coords.accuracy;
 
-        
+        L.marker([lat, lon]).addTo(mapa);
+        L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
     }
 </script>
 </html>
