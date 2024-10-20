@@ -33,13 +33,20 @@
 
     navigator.geolocation.watchPosition(success, error);
 
-    let marker = L.marker([lat, lon]).addTo(mapa);
-    let circle = L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
+    let marker, circle;
 
     function success(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         const accuracy = position.coords.accuracy;
+
+        if (marker) {
+            map.removeLayer(marker);
+            map.removeLayer(circle);
+        }
+
+        let marker = L.marker([lat, lon]).addTo(mapa);
+        let circle = L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
 
         mapa.fitBounds(circle.getBounds());
     }
