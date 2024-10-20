@@ -41,5 +41,13 @@
         L.marker([lat, lon]).addTo(mapa);
         L.circle([lat, lon], {radius: accuracy}).addTo(mapa);
     }
+
+    function error() {
+        if (err.code === 1) {
+            alert("É necessário autorizar o acesso à localização");
+        } else {
+            alert("Não foi possível acessar a localização atual");
+        }
+    }
 </script>
 </html>
