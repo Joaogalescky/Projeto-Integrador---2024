@@ -30,5 +30,15 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }
     ).addTo(map);
+
+    navigator.geolocation.watchPosition(success, error);
+
+    function success(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        
+    }
 </script>
 </html>
