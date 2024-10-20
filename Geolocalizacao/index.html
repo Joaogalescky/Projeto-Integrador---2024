@@ -10,10 +10,20 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvT1ZBo=" crossorigin=""></script>
+
+    <style>
+        #mapa {height: 350px;}
+    </style>
 </head>
 <body>
     <h1>Mapa de Localização do Usuário</h1>
 
     <div id="mapa"></div>
 </body>
+<script>
+    var mapa = L.map('mapa');
+    mapa.setView([-25.4284, -49.2733], 13);
+
+    
+</script>
 </html>
