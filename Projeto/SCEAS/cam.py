@@ -26,4 +26,10 @@ while True:
             print("Data: ",obj.data)
             prev=pres # Armazene
         cv2.putText(frame, str(obj.data), (50, 50), font, 2, (255, 0, 0), 3) # Adicione o texto na posição (50, 50)
-    cv2.imshow("live transmission", frame)
+    cv2.imshow("live transmission", frame) # Apresenta o frame processado na janela
+    
+    key = cv2.waitKey(1)
+    if key == 27: # Tecla "ESC"
+        break
+    
+cv2.destroyAllWindows() # Encerar janelas apos sair do OpenCV
