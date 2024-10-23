@@ -19,3 +19,9 @@ const char* WIFI_PASS = "7740976294";
 FirebaseData firebaseData;
 FirebaseAuth auth;
 FirebaseConfig config;
+
+WebServer server(80);
+
+// Definição de pinos
+#define LED_ONBOARD 33  // LED onboard da ESP32-CAM
+#define BUTTON_PIN 14  // Pino de um botão para controlar a leitura
