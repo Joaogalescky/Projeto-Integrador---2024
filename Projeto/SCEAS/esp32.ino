@@ -25,3 +25,8 @@ WebServer server(80);
 // Definição de pinos
 #define LED_ONBOARD 33  // LED onboard da ESP32-CAM
 #define BUTTON_PIN 14  // Pino de um botão para controlar a leitura
+
+// Resoluções da câmera
+static auto loRes = esp32cam::Resolution::find(320, 240);
+static auto midRes = esp32cam::Resolution::find(350, 530);
+static auto hiRes = esp32cam::Resolution::find(800, 600);
