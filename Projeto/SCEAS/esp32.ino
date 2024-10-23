@@ -30,3 +30,38 @@ WebServer server(80);
 static auto loRes = esp32cam::Resolution::find(320, 240);
 static auto midRes = esp32cam::Resolution::find(350, 530);
 static auto hiRes = esp32cam::Resolution::find(800, 600);
+
+// Função para capturar e servir imagens JPEG
+void serveJpg() {
+  auto frame = esp32cam::capture();
+  if (frame == nullptr) {
+    Serial.println("CAPTURE FAIL");
+    server.send(503, "", "");
+    return;
+  }
+  Serial.printf("CAPTURE OK %dx%d %db\n", frame->getWidth(), frame->getHeight(),
+                static_cast<int>(frame->size()));
+
+  // Decodificar o QR Code se a leitura estiver habilitada
+  String qrCodeData = decodeQRCode(frame);
+  if (qrCodeData != "") {
+    Serial.println("QR Code lido: " + qrCodeData);
+    sendToFirebase(qrCodeData);
+    digitalWrite(LED_ONBOARD, HIGH);  // Indicar sucesso com o LED
+    delay(1000);
+    digitalWrite(LED_ONBOARD, LOW);
+  } else {
+    Serial.println("Falha na leitura do QR Code");
+    for (int i = 0; i < 3; i++) {  // Piscar o LED em caso de falha
+      digitalWrite(LED_ONBOARD, HIGH);
+      delay(300);
+      digitalWrite(LED_ONBOARD, LOW);
+      delay(300);
+    }
+  }
+
+  server.setContentLength(frame->size());
+  server.send(200, "image/jpeg");
+  WiFiClient client = server.client();
+  frame->writeTo(client);
+}
