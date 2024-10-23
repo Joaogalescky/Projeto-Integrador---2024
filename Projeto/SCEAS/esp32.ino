@@ -96,3 +96,21 @@ void initCamera() {
   bool ok = Camera.begin(cfg);
   Serial.println(ok ? "Câmera iniciada com sucesso" : "Falha ao iniciar a câmera");
 }
+
+// Função para configurar o Firebase
+void initFirebase() {
+  config.api_key = API_KEY;
+  auth.user.email = USER_EMAIL;
+  auth.user.password = USER_PASSWORD;
+  config.database_url = DATABASE_URL;
+
+  Firebase.begin(&config, &auth);
+
+  // Tente conectar ao Firebase
+  if (!Firebase.signUp(&config, &auth, USER_EMAIL, USER_PASSWORD)) {
+    Serial.printf("Falha ao conectar ao Firebase: %s\n", config.signer.signupError.message.c_str());
+  } else {
+    Serial.println("Firebase conectado com sucesso!");
+  }
+  Firebase.reconnectWiFi(true);
+}
