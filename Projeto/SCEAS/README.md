@@ -16,4 +16,4 @@ A escolha desse projeto veio da observação das dificuldades que os agentes de 
 
 João Vitor Campõe Galescky
 
-Gabriel Albuquerque
+Gabriel Albuquerque da Silva
