@@ -77,3 +77,9 @@ void sendToFirebase(String qrData) {
     Serial.println("Falha ao enviar ao Firebase: " + firebaseData.errorReason());
   }
 }
+
+// Função para decodificar QR Code
+String decodeQRCode(std::unique_ptr<esp32cam::Frame>& frame) {
+    // Corrigir!!!!
+  return "";
+}
