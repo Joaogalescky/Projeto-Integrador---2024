@@ -1,6 +1,6 @@
 # Projeto Integrador  - 2°TADS | 2024
 
-Repositório para a matéria de Projeto Integrador II - 2° TADS - Tecnólogo em Análise e Desenvolvimento de Sistemas | 2024.
+Repositório para a matéria de Projeto Integrador II - 2° TADS - Tecnologia em Análise e Desenvolvimento de Sistemas | 2024.
 
 ## IFPR
 
