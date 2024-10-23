@@ -12,6 +12,10 @@ A escolha desse projeto veio da observação das dificuldades que os agentes de 
 -  Bootstrap
 -  Arduino IDE
 
+## Equipamentos utilizados
+-  ESP32-CAM
+-  CH340
+
 # Autores
 
 João Vitor Campõe Galescky
