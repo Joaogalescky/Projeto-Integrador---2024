@@ -114,3 +114,20 @@ void initFirebase() {
   }
   Firebase.reconnectWiFi(true);
 }
+
+// Função para conectar ao Wi-Fi
+void connectWiFi() {
+  WiFi.persistent(false);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWi-Fi conectado com sucesso!");
+  Serial.print("Acesse a câmera em: http://");
+  Serial.println(WiFi.localIP());
+  Serial.println("  /cam-lo.jpg");
+  Serial.println("  /cam-hi.jpg");
+  Serial.println("  /cam-mid.jpg");
+}
