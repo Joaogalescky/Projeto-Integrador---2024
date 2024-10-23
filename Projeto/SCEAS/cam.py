@@ -11,3 +11,8 @@ cv2.namedWindow("live transmission", cv2.WINDOW_AUTOSIZE) # Criar janela
 
 prev = "" # Armazena o último QR Code lido
 pres = "" # Armazena o QR Code atual
+
+while True:
+    img_resp = urllib.request.urlopen(url + 'cam-hi.jpg') # Requisição para a URL
+    imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8) # Converte os dados
+    frame = cv2.imdecode(imgnp, -1) # Decodifica o array para o OpenCV usar
