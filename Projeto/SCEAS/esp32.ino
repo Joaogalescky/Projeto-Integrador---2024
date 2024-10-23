@@ -131,3 +131,25 @@ void connectWiFi() {
   Serial.println("  /cam-hi.jpg");
   Serial.println("  /cam-mid.jpg");
 }
+
+// Funções para servir imagens em diferentes resoluções
+void handleJpgLo() {
+  if (!esp32cam::Camera.changeResolution(loRes)) {
+    Serial.println("Falha ao mudar para baixa resolução");
+  }
+  serveJpg();
+}
+
+void handleJpgMid() {
+  if (!esp32cam::Camera.changeResolution(midRes)) {
+    Serial.println("Falha ao mudar para resolução média");
+  }
+  serveJpg();
+}
+
+void handleJpgHi() {
+  if (!esp32cam::Camera.changeResolution(hiRes)) {
+    Serial.println("Falha ao mudar para alta resolução");
+  }
+  serveJpg();
+}
