@@ -15,4 +15,5 @@ A escolha desse projeto veio da observação das dificuldades que os agentes de 
 # Autores
 
 João Vitor Campõe Galescky
+
 Gabriel Alburquerque
