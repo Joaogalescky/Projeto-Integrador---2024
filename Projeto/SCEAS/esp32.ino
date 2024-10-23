@@ -83,3 +83,16 @@ String decodeQRCode(std::unique_ptr<esp32cam::Frame>& frame) {
     // Corrigir!!!!
   return "";
 }
+
+// Função para inicializar a câmera
+void initCamera() {
+  using namespace esp32cam;
+  Config cfg;
+  cfg.setPins(pins::AiThinker);
+  cfg.setResolution(hiRes);
+  cfg.setBufferCount(2);
+  cfg.setJpeg(80);
+
+  bool ok = Camera.begin(cfg);
+  Serial.println(ok ? "Câmera iniciada com sucesso" : "Falha ao iniciar a câmera");
+}
