@@ -173,3 +173,18 @@ void setup() {
 
   server.begin();
 }
+
+void loop() {
+  server.handleClient();
+
+  // Verifica o estado do botão para habilitar/desabilitar a leitura do QR Code
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    leituraHabilitada = !leituraHabilitada;  // Alterna o estado
+    if (leituraHabilitada) {
+      Serial.println("Leitura de QR Code HABILITADA.");
+    } else {
+      Serial.println("Leitura de QR Code DESABILITADA.");
+    }
+    delay(500);  // Debounce do botão
+  }
+}
