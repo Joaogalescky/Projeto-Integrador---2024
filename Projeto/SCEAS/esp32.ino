@@ -14,3 +14,8 @@ const char* WIFI_PASS = "7740976294";
 #define USER_EMAIL "joaocvgalescky@gmail.com"
 #define USER_PASSWORD "sceas2024"
 #define DATABASE_URL "https://sceas-49731.firebaseio.com"
+
+// Objetos do Firebase
+FirebaseData firebaseData;
+FirebaseAuth auth;
+FirebaseConfig config;
