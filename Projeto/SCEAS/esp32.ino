@@ -65,3 +65,15 @@ void serveJpg() {
   WiFiClient client = server.client();
   frame->writeTo(client);
 }
+
+// Função para enviar o QR Code ao Firebase
+void sendToFirebase(String qrData) {
+  String path = "/leituraQR";
+
+  // Enviar os dados ao Firebase
+  if (Firebase.setString(firebaseData, path, qrData)) {
+    Serial.println("Dados enviados ao Firebase com sucesso.");
+  } else {
+    Serial.println("Falha ao enviar ao Firebase: " + firebaseData.errorReason());
+  }
+}
