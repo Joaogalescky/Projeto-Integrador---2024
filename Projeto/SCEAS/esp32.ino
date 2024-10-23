@@ -153,3 +153,23 @@ void handleJpgHi() {
   }
   serveJpg();
 }
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println();
+
+  // Configuração de pinos
+  pinMode(LED_ONBOARD, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);  // Botão com pull-up interno
+
+  initCamera();      // Inicializa a câmera
+  connectWiFi();     // Conecta ao Wi-Fi
+  initFirebase();    // Configura o Firebase
+
+  // Configuração das rotas do servidor
+  server.on("/cam-lo.jpg", handleJpgLo);
+  server.on("/cam-mid.jpg", handleJpgMid);
+  server.on("/cam-hi.jpg", handleJpgHi);
+
+  server.begin();
+}
