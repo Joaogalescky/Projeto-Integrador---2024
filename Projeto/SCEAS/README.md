@@ -16,6 +16,13 @@ A escolha desse projeto veio da observação das dificuldades que os agentes de 
 -  ESP32-CAM
 -  CH340
 
+#### Instação do pacote
+```bash
+pip install django djangorestframework
+pip install django-rest-swagger
+pip install firebase-admin
+```
+
 # Autores
 
 João Vitor Campõe Galescky
