@@ -26,6 +26,8 @@ WebServer server(80);
 #define LED_ONBOARD 33  // LED onboard da ESP32-CAM
 #define BUTTON_PIN 14  // Pino de um botão para controlar a leitura
 
+bool leituraHabilitada = false;
+
 // Resoluções da câmera
 static auto loRes = esp32cam::Resolution::find(320, 240);
 static auto midRes = esp32cam::Resolution::find(350, 530);
@@ -108,9 +110,18 @@ void initFirebase() {
 
   // Tente conectar ao Firebase
   if (!Firebase.signUp(&config, &auth, USER_EMAIL, USER_PASSWORD)) {
-    Serial.printf("Falha ao conectar ao Firebase: %s\n", config.signer.signupError.message.c_str());
+      if (config.signer.signupError.code == 400) { // Código de erro específico para e-mail existente
+          Serial.println("Usuário já existe. Tentando fazer login...");
+          if (!Firebase.signIn(&config, &auth, USER_EMAIL, USER_PASSWORD)) {
+              Serial.printf("Falha ao conectar ao Firebase: %s\n", config.signer.signupError.message.c_str());
+          } else {
+              Serial.println("Firebase conectado com sucesso!");
+          }
+      } else {
+          Serial.printf("Falha ao conectar ao Firebase: %s\n", config.signer.signupError.message.c_str());
+      }
   } else {
-    Serial.println("Firebase conectado com sucesso!");
+      Serial.println("Firebase conectado com sucesso!");
   }
   Firebase.reconnectWiFi(true);
 }
