@@ -85,17 +85,17 @@ cd projeto
 python manage.py startapp api
 ```
 
-#### 4.1.4 Editando os settings.py
+#### 4.1.4 Editar os settings.py
 ```bash
 INSTALLED_APPS = [
     'api',
-    'drf-yasg'
+    'drf_yasg'
     'rest_framework',
     ...
 ]
 ```
 
-#### 4.1.5 Definindo o models.py
+#### 4.1.5 Definir o models.py
 ```bash
 #api/models.py
 from django.db import models
@@ -110,7 +110,7 @@ class Aluno(models.Model):
         return self.nome
 ```
 
-#### 4.1.6 Criar serializers
+#### 4.1.6 Criar serializers na pasta 'api'
 ```bash
 #api/serializers.py
 from rest_framework import serializers
@@ -122,7 +122,7 @@ class AlunoSerializer(serializers.ModelSerializer):
         fields = ['id', 'nome', 'idade', 'email', 'curso']
 ```
 
-#### 4.1.7 Criar Views
+#### 4.1.7 Definir Views
 ```bash
 # api/views.py
 from django.shortcuts import render
@@ -136,7 +136,7 @@ class AlunoViewSet(viewsets.ModelViewSet):
     serializer_class = AlunoSerializer
 ```
 
-#### 4.1.8 Incluindo as urls.py
+#### 4.1.8 Incluir as urls.py
 ```bash
 #projeto/urls.py
 from django.contrib import admin
@@ -167,7 +167,7 @@ urlpatterns = [
 ]
 ```
 
-#### 4.1.9 Configurar URLs
+#### 4.1.9 Criar URLs na pasta 'api'
 ```bash
 # api/urls.py
 from django.urls import path, include
