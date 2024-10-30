@@ -63,7 +63,13 @@ pip install django-rest-swagger
 django-admin startproject projeto
 cd projeto
 ```
-#### 4.1.3 Editando os settings.py
+
+#### 4.1.3 Criação da API Django
+```bash
+python manage.py startapp api
+```
+
+#### 4.1.4 Editar os settings.py
 ```bash
 INSTALLED_APPS = [
     'api',
@@ -73,7 +79,48 @@ INSTALLED_APPS = [
 ]
 ```
 
-#### 4.1.4 Incluindo as urls.py
+#### 4.1.5 Definir o models.py
+```bash
+#api/models.py
+from django.db import models
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    email = models.EmailField(unique=True)
+    curso = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.nome
+```
+
+#### 4.1.6 Criar serializers na pasta 'api'
+```bash
+#api/serializers.py
+from rest_framework import serializers
+from .models import Aluno
+
+class AlunoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Aluno
+        fields = ['id', 'nome', 'idade', 'email', 'curso']
+```
+
+#### 4.1.7 Definir Views
+```bash
+# api/views.py
+from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Aluno
+from .serializers import AlunoSerializer
+
+# Create your views here.
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
+```
+
+#### 4.1.8 Incluir as urls.py
 ```bash
 #projeto/urls.py
 from django.contrib import admin
@@ -93,64 +140,7 @@ urlpatterns = [
 ]
 ```
 
-#### 4.1.5 Criação da API Django
-```bash
-cd ..
-python manage.py startapp api
-cd api/
-```
-
-#### 4.1.6 Definindo o models.py
-```bash
-#api/models.py
-from django.db import models
-
-class Aluno(models.Model):
-    nome = models.CharField(max_length=100)
-    idade = models.IntegerField()
-    email = models.EmailField(unique=True)
-    curso = models.CharField(max_length=100)
-    
-    def __str__(self):
-        return self.nome
-```
-
-#### 4.1.7 Executar as migrações
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-#### 4.1.8 Criar e definir serializers.py
-```bash
-touch serializers.py
-```
-```bash
-#api/serializers.py
-from rest_framework import serializers
-from .models import Aluno
-
-class AlunoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Aluno
-        fields = ['id', 'nome', 'idade', 'email', 'curso']
-```
-
-#### 4.1.9 Definindo views.py
-```bash
-# api/views.py
-from django.shortcuts import render
-from rest_framework import viewsets
-from .models import Aluno
-from .serializers import AlunoSerializer
-
-# Create your views here.
-class AlunoViewSet(viewsets.ModelViewSet):
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
-```
-
-#### 4.2.0 Configurar urls.py
+#### 4.1.9 Criar URLs na pasta 'api'
 ```bash
 # api/urls.py
 from django.urls import path, include
@@ -161,6 +151,12 @@ router = DefaultRouter()
 router.register(r'alunos', AlunoViewSet, basename='aluno')
 
 urlpatterns = router.urls
+```
+
+#### 4.2.0 Executar as migrações
+```bash
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ### 5. Testar a API
