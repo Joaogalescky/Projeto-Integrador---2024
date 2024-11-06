@@ -1,11 +1,55 @@
-from django.shortcuts import render
-from rest_framework import generics
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from firebase_config import db
 from .models import Usuario, Veiculo
 from .serializers import UsuarioSerializer, VeiculoSerializer
+from rest_framework import generics
 
-# Create your views here.
+# Página inicial (apenas para usuários autenticados)
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return render(request, 'home.html')
+
+# Função de login que renderiza a página
+def login_view(request):
+    # Renderiza a página de login se o método não for POST
+    return render(request, 'login.html')
+
+# Função de logout
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+# Endpoint de autenticação para o AJAX do frontend
+@csrf_exempt  # Desativar CSRF apenas para fins de teste; melhore a segurança para produção
+def api_login(request):
+    if request.method == "POST":
+        try:
+            # Lê o corpo da requisição JSON
+            data = json.loads(request.body)
+            email = data.get("email")
+            password = data.get("password")
+
+            # Tentar autenticar com Django
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                # Faz o login e retorna resposta JSON de sucesso
+                login(request, user)
+                return JsonResponse({"success": True, "message": "Login realizado com sucesso"})
+            else:
+                # Credenciais inválidas
+                return JsonResponse({"success": False, "message": "Credenciais inválidas"})
+        except json.JSONDecodeError:
+            # Erro no formato JSON da requisição
+            return JsonResponse({"success": False, "message": "Erro na requisição. Verifique os dados enviados."})
+    
+    # Método não permitido
+    return JsonResponse({"error": "Método não permitido"}, status=405)
 
 # View para listar ou criar usuários
 class UsuarioListCreateView(generics.ListCreateAPIView):
@@ -64,8 +108,33 @@ class UsuarioUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 class VeiculoListCreateView(generics.ListCreateAPIView):
     queryset = Veiculo.objects.all()
     serializer_class = VeiculoSerializer
+    
+    def perform_create(self, serializer):
+        veiculo = serializer.save()
+        # Atualiza no Firebase (opcional, se quiser)
+        db.collection('veiculos').document(str(veiculo.id)).set({
+            "placa": veiculo.placa,
+            "modelo": veiculo.modelo,
+            "marca": veiculo.marca,
+            "cor": veiculo.cor,
+        })
 
 # View para visualizar, atualizar ou deletar um veículo
 class VeiculoUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Veiculo.objects.all()
     serializer_class = VeiculoSerializer
+    
+    def perform_update(self, serializer):
+        veiculo = serializer.save()
+        # Atualiza o veículo no Firebase
+        db.collection('veiculos').document(str(veiculo.id)).set({
+            "placa": veiculo.placa,
+            "modelo": veiculo.modelo,
+            "marca": veiculo.marca,
+            "cor": veiculo.cor,
+        })
+
+    def perform_destroy(self, instance):
+        # Exclui o veículo do Firebase
+        db.collection('veiculos').document(str(instance.id)).delete()
+        instance.delete()
