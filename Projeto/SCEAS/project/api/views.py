@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import json
 
 from firebase_config import db
@@ -9,47 +8,32 @@ from .models import Usuario, Veiculo
 from .serializers import UsuarioSerializer, VeiculoSerializer
 from rest_framework import generics
 
-# Página inicial (apenas para usuários autenticados)
+# Página inicial
 def home(request):
     if not request.user.is_authenticated:
         return redirect('login')
     return render(request, 'home.html')
 
-# Função de login que renderiza a página
+# Função de login
 def login_view(request):
-    # Renderiza a página de login se o método não for POST
+    if request.method == "POST":
+        data = json.loads(request.body)
+        email = data.get("email")
+        password = data.get("password")
+        
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({"success": True, "message": "Login realizado com sucesso"})
+        else:
+            return JsonResponse({"success": False, "message": "Credenciais inválidas"})
+    
     return render(request, 'login.html')
 
 # Função de logout
 def logout_view(request):
     logout(request)
     return redirect('login')
-
-# Endpoint de autenticação para o AJAX do frontend
-@csrf_exempt  # Desativar CSRF apenas para fins de teste; melhore a segurança para produção
-def api_login(request):
-    if request.method == "POST":
-        try:
-            # Lê o corpo da requisição JSON
-            data = json.loads(request.body)
-            email = data.get("email")
-            password = data.get("password")
-
-            # Tentar autenticar com Django
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                # Faz o login e retorna resposta JSON de sucesso
-                login(request, user)
-                return JsonResponse({"success": True, "message": "Login realizado com sucesso"})
-            else:
-                # Credenciais inválidas
-                return JsonResponse({"success": False, "message": "Credenciais inválidas"})
-        except json.JSONDecodeError:
-            # Erro no formato JSON da requisição
-            return JsonResponse({"success": False, "message": "Erro na requisição. Verifique os dados enviados."})
-    
-    # Método não permitido
-    return JsonResponse({"error": "Método não permitido"}, status=405)
 
 # View para listar ou criar usuários
 class UsuarioListCreateView(generics.ListCreateAPIView):
