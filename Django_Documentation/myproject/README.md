@@ -87,11 +87,35 @@ python manage.py startapp api
 
 #### 4.1.4 Editar os settings.py
 ```bash
+import os
+
+[...]
+
 INSTALLED_APPS = [
     'api',
-    'drf_yasg'
+    'drf_yasg',
     'rest_framework',
     ...
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Permissão acesso a todos para a API
+    ],
+}
+
+[...]
+
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        [...]
+    },
 ]
 ```
 
