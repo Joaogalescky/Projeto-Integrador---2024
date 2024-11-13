@@ -52,10 +52,12 @@ cd DjangoDocumentacao
 
 ## 4. Construindo o projeto
 ### 4.1  Django, Django Rest Framework e Swagger
-#### 4.1.1 Instação do pacote
+#### 4.1.1 Instação dos pacotes
 ```bash
 pip install django djangorestframework
 pip install django-rest-swagger
+pip install pyyaml
+pip install inflection
 ```
 
 #### 4.1.2 Criação do projeto Django
@@ -71,11 +73,25 @@ python manage.py startapp api
 
 #### 4.1.4 Editar os settings.py
 ```bash
+import os
+
+[...]
+
 INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework_swagger',
-    ...
+    [...]
+]
+
+[...]
+
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        [...]
+    },
 ]
 ```
 
