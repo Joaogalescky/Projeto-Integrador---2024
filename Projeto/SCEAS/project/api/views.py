@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 import json
-
 from firebase_config import db
+
 from .models import Usuario, Veiculo
-from .serializers import UsuarioSerializer, VeiculoSerializer
-from rest_framework import generics
+from .serializers import UserSerializer, UsuarioSerializer, VeiculoSerializer
+from rest_framework import generics, status
+from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 # Página inicial
 def home(request):
@@ -35,6 +38,29 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+# View para criação de usuários (login)
+class UserRegisterAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]  # Permite acesso público a este endpoint
+
+# View para registro de usuários com criação de token
+class UserRegisterAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]  # Permite acesso público a este endpoint
+
+    def perform_create(self, serializer):
+        # Salva o usuário no banco de dados
+        user = serializer.save()
+
+        # Cria o token para o novo usuário
+        token, created = Token.objects.get_or_create(user=user)
+
+        # Retorna os dados do usuário e o token
+        return Response({
+            "user": serializer.data,
+            "token": token.key
+        }, status=status.HTTP_201_CREATED)
+
 # View para listar ou criar usuários
 class UsuarioListCreateView(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
@@ -42,6 +68,7 @@ class UsuarioListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         usuario = serializer.save()  # Salva o usuário no banco de dados
+
         # Adiciona o usuário no Firebase
         firebase_data = {
             "nome": usuario.nome,

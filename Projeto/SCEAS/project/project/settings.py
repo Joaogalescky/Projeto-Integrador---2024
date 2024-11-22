@@ -39,6 +39,7 @@ STATICFILES_DIRS = [
 INSTALLED_APPS = [
     'api',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,9 +53,11 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',  # Isso habilita a navegação interativa da API
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',  # Permissão para todos acessarem a API
+        'rest_framework.permissions.IsAuthenticated',
     ],
 }
 

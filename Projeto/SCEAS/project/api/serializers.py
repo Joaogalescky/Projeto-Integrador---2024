@@ -1,18 +1,32 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from firebase_config import db
 from .models import Usuario, Veiculo
 
+# Token
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True, style={'input_type':'password'})
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password'] 
+
+    def create(self, validated_data):
+        # Cria usuário com o método 'create_user' para garantir o hash da senha
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data.get['email', ''],
+            password=validated_data['password']
+        )
+        return user
+
 # Serializador de Veiculo
-
-
 class VeiculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Veiculo
         fields = ['id', 'placa', 'modelo', 'marca', 'cor']
 
 # Serializador de Usuario
-
-
 class UsuarioSerializer(serializers.ModelSerializer):
     veiculos = VeiculoSerializer(many=True)
 
