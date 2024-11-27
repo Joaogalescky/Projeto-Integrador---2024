@@ -11,8 +11,11 @@ urlpatterns = [
     path('auth/', obtain_auth_token, name='api_token_auth'),
 
     # Páginas Web
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
+    path('register/', views.register_view, name='register'),
+    path('profile/', views.profile_view, name='profile'),
     path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     
     # Endpoints para usuários
     path('usuarios/', UsuarioListCreateView.as_view(), name='usuario-list-create'),
