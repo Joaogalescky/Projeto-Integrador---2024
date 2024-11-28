@@ -1,4 +1,6 @@
 django 
 djangorestframework
+djangorestframework-simplejwt
+django-rest-authtoken
 drf-yasg
 firebase-admin
