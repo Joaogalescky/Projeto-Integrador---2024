@@ -1,14 +1,14 @@
 from django.urls import path
 from . import views
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import UserRegisterAPIView, UsuarioListCreateView, UsuarioUpdateDeleteView, VeiculoListCreateView, VeiculoUpdateDeleteView
+from .views import UserRegisterAPIView, UserLoginAPIView, UsuarioListCreateView, UsuarioUpdateDeleteView, VeiculoListCreateView, VeiculoUpdateDeleteView
 
 urlpatterns = [
-    # Registro
+    # Registro de usuário
     path('register/', UserRegisterAPIView.as_view(), name='user-register'),
 
-    # Login (token)
-    path('auth/', obtain_auth_token, name='api_token_auth'),
+    # Login (Token de autenticação via POST)
+    path('login/', UserLoginAPIView.as_view(), name='user-login'),
 
     # Páginas Web
     path('', views.home, name='home'),
