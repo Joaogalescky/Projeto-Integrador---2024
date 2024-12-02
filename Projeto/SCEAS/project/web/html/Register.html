@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/register.css">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h1>Cadastre-se!</h1>
+            <form action="" method="POST">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required="">
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8"
+                    required="">
+
+                <label for="confirm-password">Confirme a senha</label>
+                <input type="password" id="confirm-password" name="confirm-password"
+                    placeholder="Pelo menos 8 caracteres" minlength="8" required="">
+
+                <button type="submit" class="btn">Cadastre-se</button>
+            </form>
+            <footer>
+                <img src="./images/logo.png" alt="Logo Instituto Federal do Paraná" class="logo">
+                <p>2024 INSTITUTO FEDERAL DO PARANÁ</p>
+            </footer>
+        </div>
+        <div class="image-section">
+            <img src="./images/image.jpg" alt="Evento no Instituto Federal do Paraná">
+        </div>
+    </div>
+</body>
+
+</html>
