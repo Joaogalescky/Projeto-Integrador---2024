@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/register.css">
@@ -13,29 +12,35 @@
     <div class="container">
         <div class="form-section">
             <h1>Cadastre-se!</h1>
+            <p>Cadastra-se para entrar no sistema SCEAS</p>
+
             <form action="" method="POST">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required="">
+                <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required>
 
                 <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8"
-                    required="">
+                <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
 
                 <label for="confirm-password">Confirme a senha</label>
-                <input type="password" id="confirm-password" name="confirm-password"
-                    placeholder="Pelo menos 8 caracteres" minlength="8" required="">
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
 
                 <button type="submit" class="btn">Cadastre-se</button>
             </form>
+
+            <p class="no-account">
+                Já tem uma conta? <a href="#" id="login-link">Faço o login</a>
+            </p>
+
             <footer>
                 <img src="../images/logo.png" alt="Logo Instituto Federal do Paraná" class="logo">
                 <p>2024 INSTITUTO FEDERAL DO PARANÁ</p>
             </footer>
         </div>
         <div class="image-section">
-            <img src="../images/imagem.jpg" alt="Evento no Instituto Federal do Paraná">
+            <img src="../images/imagem.jpg" alt="Imagem" class="background-image">
         </div>
     </div>
+    <script src="../scripts/register.js"></script>
 </body>
 
 </html>
