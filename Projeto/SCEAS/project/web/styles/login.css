@@ -63,6 +63,9 @@ form input {
 
 .forgot-password {
     display: inline-block;
+    position: relative;
+    left: 0;
+    bottom: 20px;
     margin: 0.5rem 0;
     color: #007bff;
     font-size: 0.9rem;
@@ -71,6 +74,10 @@ form input {
 
 .forgot-password:hover {
     text-decoration: underline;
+}
+
+.password-container {
+    position: relative;
 }
 
 form .btn {
