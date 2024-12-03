@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/login.css">
@@ -12,21 +11,28 @@
 <body>
     <div class="container">
         <div class="form-section">
-            <h1>As boas-vindas!</h1>
-            <p>Faça login para ter acesso ao sistema SCEAS</p>
-            <form action="" method="POST">
+            <h1>Bem-vindo(a)!</h1>
+            <p>Faça login para acessar o sistema SCEAS</p>
+            
+            <form id="login-form" method="POST">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required="">
+                <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required>
 
                 <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" required="">
-                <a href="" class="forgot-password">Esqueceu a senha?</a><br>
+                <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
+                
+                <!-- Container para mensagens de erro -->
+                <div id="login-error" style="color: red; display: none;"></div>
+                
+                <a href="./ForgotPassword.html" class="forgot-password">Esqueceu a senha?</a><br>
 
                 <button type="submit" class="btn">Login</button>
             </form>
+            
             <p class="no-account">
-                Não tem uma conta? <a href="./Register.html">Cadastre-se</a>
+                Não tem uma conta? <a id="register-link">Cadastre-se</a>
             </p>
+
             <footer>
                 <img src="../images/logo.png" alt="Logo Instituto Federal do Paraná" class="logo">
                 <p>2024 INSTITUTO FEDERAL DO PARANÁ</p>
@@ -36,6 +42,7 @@
             <img src="../images/imagem.jpg" alt="Imagem" class="background-image">
         </div>
     </div>
+    <script src="../scripts/login.js"></script>
 </body>
 
 </html>
