@@ -13,13 +13,13 @@ from firebase_config import db
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'html/Home.html')
+        return render(request, '../templates/Home.html')
     else:
         return redirect('login')
 
 def profile_view(request):
     if request.user.is_authenticated:
-        return render(request, 'html/Profile.html', {'user': request.user})
+        return render(request, '../templates/Profile.html', {'user': request.user})
     else:
         return redirect('login')
 
@@ -30,12 +30,12 @@ def register_view(request):
         
         # Verifica se o email já está em uso
         if User.objects.filter(email=email).exists():
-            return render(request, 'html/Register.html', {'error': 'Email já em uso'})
+            return render(request, '../templates/Register.html', {'error': 'Email já em uso'})
         
         user = User.objects.create_user(email=email, password=password)
         user.save()
         return redirect('login')
-    return render(request, 'html/Register.html')
+    return render(request, '../templates/Register.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -48,8 +48,8 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'html/Login.html', {'error': 'Email ou senha inválidos'})
-    return render(request, 'html/Login.html')
+            return render(request, '../templates/Login.html', {'error': 'Email ou senha inválidos'})
+    return render(request, '../templates/Login.html')
 
 # def logout_view(request):
 #     logout(request)
@@ -68,10 +68,10 @@ def forgot_password_view(request):
                 [email],
                 fail_silently=False,
             )
-            return render(request, 'html/ForgotPassword.html', {'message': 'Instruções do reset da senha foram enviados ao seu email.'})
+            return render(request, '../templates/ForgotPassword.html', {'message': 'Instruções do reset da senha foram enviados ao seu email.'})
         except User.DoesNotExist:
-            return render(request, 'html/ForgotPassword.html', {'error': 'Nenhum usuário com esse email foi encontrado.'})
-    return render(request, 'html/ForgotPassword.html')
+            return render(request, '../templates/ForgotPassword.html', {'error': 'Nenhum usuário com esse email foi encontrado.'})
+    return render(request, '../templates/ForgotPassword.html')
 
 # Criação de usuários (registro)
 class UserRegisterAPIView(generics.CreateAPIView):
