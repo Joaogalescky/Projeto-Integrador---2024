@@ -35,7 +35,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),  # Inclua suas URLs da API
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Interface do Swagger
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Interface do ReDoc
+    path('api/', include('api.urls')),  # URLs da API
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),  # Interface do Swagger
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),  # Interface do ReDoc
 ]
