@@ -38,7 +38,8 @@ document.getElementById('login-form').addEventListener('submit', function (event
         });
 });
 
-// Configurar o link de cadastro dinamicamente
-document.getElementById('register-link').addEventListener('click', function () {
-    window.location.href = './Register.html'; // Ajuste o caminho conforme necessário
-});
+// Link de cadastro dinamicamente
+// document.getElementById('register-link').addEventListener('click', function () {
+//     const url = this.getAttribute('data-url');
+//     window.location.href = url;
+// });
