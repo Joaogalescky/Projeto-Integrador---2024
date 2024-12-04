@@ -9,12 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password'] 
+        fields = ['id', 'email', 'password'] 
 
     def create(self, validated_data):
         # Cria usuário com o método 'create_user' para garantir o hash da senha
         user = User.objects.create_user(
-            username=validated_data['username'],
             email=validated_data.get['email', ''],
             password=validated_data['password']
         )

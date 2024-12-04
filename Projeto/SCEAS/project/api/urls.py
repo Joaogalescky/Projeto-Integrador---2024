@@ -4,6 +4,9 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import UserRegisterAPIView, UserLoginAPIView, UsuarioListCreateView, UsuarioUpdateDeleteView, VeiculoListCreateView, VeiculoUpdateDeleteView
 
 urlpatterns = [
+    #Token
+    path('auth/', obtain_auth_token, name='api_token_auth'),
+    
     # Registro de usuário
     path('register/', UserRegisterAPIView.as_view(), name='user-register'),
 
@@ -11,11 +14,12 @@ urlpatterns = [
     path('login/', UserLoginAPIView.as_view(), name='user-login'),
 
     # Páginas Web
-    path('', views.home, name='home'),
-    path('register/', views.register_view, name='register'),
+    path('home/', views.home, name='home'),
+    path('cadastre/', views.register_view, name='cadastre'),
     path('profile/', views.profile_view, name='profile'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('entry/', views.login_view, name='entry'),
+    # path('logout/', views.logout_view, name='logout'),
+    path('forgot-password/', views.forgot_password_view, name='forgot-password'),
     
     # Endpoints para usuários
     path('usuarios/', UsuarioListCreateView.as_view(), name='usuario-list-create'),
