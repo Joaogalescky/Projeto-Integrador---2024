@@ -27,7 +27,7 @@
                 <div class="password-container">
                     <label for="password">Senha</label>
                     <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
-                    <a href="./ForgotPassword.html" class="forgot-password">Esqueceu a senha?</a>
+                    <a href="{% url 'forgot-password' %}" class="forgot-password">Esqueceu a senha?</a>
                 </div>
 
                 <button type="submit" class="btn">Login</button>
