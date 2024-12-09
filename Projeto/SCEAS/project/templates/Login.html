@@ -16,6 +16,7 @@
             <p>Faça login para acessar o sistema SCEAS</p>
             
             <form id="login-form" method="POST">
+                {% csrf_token %}
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required>
 
@@ -26,8 +27,6 @@
                 <div id="login-error" style="color: red; display: none;"></div>
                 
                 <div class="password-container">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
                     <a href="{% url 'forgot-password' %}" class="forgot-password">Esqueceu a senha?</a>
                 </div>
 

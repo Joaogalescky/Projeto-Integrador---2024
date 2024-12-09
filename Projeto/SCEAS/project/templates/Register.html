@@ -16,6 +16,7 @@
             <p>Cadastra-se para entrar no sistema SCEAS</p>
 
             <form id="register-form" method="POST">
+                {% csrf_token %}
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Exemplo@email.com" required>
 
