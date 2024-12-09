@@ -2,7 +2,7 @@
 const tableBody = document.getElementById("user-table-body");
 
 // Fetch para obter dados do Firebase ou API
-fetch('/api/usuarios/')
+fetch('/usuarios/')
     .then(response => response.json())
     .then(data => {
         // Preenche a tabela com os dados

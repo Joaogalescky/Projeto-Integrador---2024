@@ -10,7 +10,7 @@ document.getElementById('forgot-password-form').addEventListener('submit', funct
         email: email
     };
 
-    fetch('/api/password-reset/', { // Substitua pela rota real no Django
+    fetch('/password-reset/', { // Substitua pela rota real no Django
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

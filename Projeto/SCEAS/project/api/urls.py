@@ -17,7 +17,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('cadastre/', views.register_view, name='cadastre'),
     path('profile/', views.profile_view, name='profile'),
-    path('entry/', views.login_view, name='entry'),
+    path('', views.login_view, name='entry'),
     # path('logout/', views.logout_view, name='logout'),
     path('forgot-password/', views.forgot_password_view, name='forgot-password'),
     

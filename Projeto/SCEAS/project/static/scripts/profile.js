@@ -17,7 +17,7 @@ document.getElementById('search-user-btn').addEventListener('click', function ()
         return;
     }
 
-    fetch(`/api/usuarios/${userId}/`, {
+    fetch(`/usuarios/${userId}/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
